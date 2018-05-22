@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Home</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card padding *ngIf="!pegsdk.user; else userCard">
+    <ion-item>
+      <ion-label floating> Tracker </ion-label>
+      <ion-input [(ngModel)]="tracker"></ion-input>
+    </ion-item>
+    <ion-item>
+      <button ion-button (click)="login()" block large> LOGIN </button>
+    </ion-item>
+  </ion-card>
+
+  <ng-template #userCard>
+    <ion-list>
+      <ion-item>
+        <b>name:</b> {{pegsdk.user.name}}
+      </ion-item>
+      <ion-item>
+        <b>tracker:</b> {{pegsdk.user.tracker.token}}
+      </ion-item>
+      <ion-item>
+        <b>site:</b> {{pegsdk.user.tracker.site_url}}
+        <small>({{pegsdk.user.tracker.site_id}})</small>
+      </ion-item>
+      <ion-item>
+        <b>device:</b> {{pegsdk.user.tracker.device}}
+      </ion-item>
+    </ion-list>
+
+    <ion-list>
+      <ion-item>
+        <ion-label floating>Latitude</ion-label>
+        <ion-input type="number" [(ngModel)]="event.latitude"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Longitude</ion-label>
+        <ion-input type="number" [(ngModel)]="event.longitude"></ion-input>
+
+      </ion-item>
+      <ion-item>
+        <ion-label floating>MPH</ion-label>
+        <ion-input type="number" [(ngModel)]="event.mph"></ion-input>
+
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Altitude</ion-label>
+        <ion-input type="number" [(ngModel)]="event.altitude"></ion-input>
+
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Heading</ion-label>
+        <ion-input type="number" [(ngModel)]="event.heading"></ion-input>
+
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Label</ion-label>
+        <ion-input [(ngModel)]="event.label"></ion-input>
+      </ion-item>
+
+      <button ion-button block (click)="sendEvent()">Send Event</button>
+      <button ion-button block color="danger" (click)="logout()">Logout</button>
+    </ion-list>
+  </ng-template>
+</ion-content>
